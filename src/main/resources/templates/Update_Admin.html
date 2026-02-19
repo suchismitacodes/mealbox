@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mealbox — Update Admin</title>
+    <link rel="stylesheet" th:href="@{/css/Update_Admin.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+
+<div class="form-container">
+    <h2><i class="fa-solid fa-user-pen"></i> Update Admin</h2>
+    <form th:action="@{/updatingAdmin/{id}(id=${admin.adminId})}" method="get">
+        <div class="form-group">
+            <label>Admin Name</label>
+            <input type="text" name="adminName" th:value="${admin.adminName}" required/>
+        </div>
+        <div class="form-group">
+            <label>Admin Email</label>
+            <input type="email" name="adminEmail" th:value="${admin.adminEmail}" required/>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="adminPassword" th:value="${admin.adminPassword}"/>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="adminNumber" th:value="${admin.adminNumber}"/>
+        </div>
+        <button type="submit" class="btn-submit">Update Admin</button>
+        <a th:href="@{/admin/services}" class="btn-cancel">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

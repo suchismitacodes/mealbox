@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+<nav th:fragment="navbar()">
+    <div class="nav-container">
+        <div class="logo">
+            <img th:src="@{/Images/foodielogo.jfif}" alt="Mealbox Logo" class="logo-img"/>
+            <span class="brand-name">MealBox</span>
+        </div>
+        <ul class="nav-links">
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/location}">Locate Us</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/login}" class="login-btn">Log In</a></li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

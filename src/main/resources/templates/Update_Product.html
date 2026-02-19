@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mealbox — Update Product</title>
+    <link rel="stylesheet" th:href="@{/css/Update_Product.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+
+<div class="form-container">
+    <h2><i class="fa-solid fa-pen-to-square"></i> Update Product</h2>
+    <form th:action="@{/updatingProduct/{id}(id=${product.pid})}" method="get">
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" name="pname" th:value="${product.pname}" required/>
+        </div>
+        <div class="form-group">
+            <label>Price (₹)</label>
+            <input type="number" name="pprice" th:value="${product.pprice}" step="0.01" min="0" required/>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="pdescription" rows="3" th:text="${product.pdescription}"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" name="category" th:value="${product.category}" required/>
+        </div>
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" name="imageUrl" th:value="${product.imageUrl}"/>
+        </div>
+        <div class="form-group">
+            <label>Rating (1–5)</label>
+            <input type="number" name="rating" th:value="${product.rating}" min="1" max="5"/>
+        </div>
+        <button type="submit" class="btn-submit">Update Product</button>
+        <a th:href="@{/admin/services}" class="btn-cancel">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

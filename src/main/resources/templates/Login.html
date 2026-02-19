@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mealbox — Login</title>
+    <link rel="stylesheet" th:href="@{/css/Login.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <!-- Admin Login Panel -->
+    <div class="login-panel admin-panel">
+        <h2><i class="fa-solid fa-user-shield"></i> Admin Login</h2>
+        <form th:action="@{/adminLogin}" method="post" th:object="${adminLogin}">
+            <div class="form-group">
+                <label for="adminEmail">Email</label>
+                <input type="email" id="adminEmail" name="email" placeholder="admin@mealbox.com" required/>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" name="password" placeholder="••••••••" required/>
+            </div>
+            <p class="error-msg" th:if="${error}" th:text="${error}"></p>
+            <button type="submit" class="btn-login">Login as Admin</button>
+        </form>
+    </div>
+
+    <!-- User Login Panel -->
+    <div class="login-panel user-panel">
+        <h2><i class="fa-solid fa-user"></i> User Login</h2>
+        <form th:action="@{/userLogin}" method="post">
+            <div class="form-group">
+                <label for="userEmail">Email</label>
+                <input type="email" id="userEmail" name="userEmail" placeholder="user@email.com" required/>
+            </div>
+            <div class="form-group">
+                <label for="userPassword">Password</label>
+                <input type="password" id="userPassword" name="userPassword"
+                       minlength="4" maxlength="8" placeholder="4–8 characters" required/>
+            </div>
+            <p class="error-msg" th:if="${error2}" th:text="${error2}"></p>
+            <button type="submit" class="btn-login">Login as User</button>
+        </form>
+        <p class="register-link">New here? <a th:href="@{/register}">Register</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>
