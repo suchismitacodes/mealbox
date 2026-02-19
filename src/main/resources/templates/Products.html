@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Products</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Our Menu</title>
     <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
     <link rel="stylesheet" th:href="@{/css/Products.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<nav th:replace="~{Navigation::navbar()}"></nav>
+<nav th:replace="~{Navigation :: navbar()}"></nav>
 
-<div class="products-page">
-    <h1 class="page-title">Our Menu</h1>
+<main class="container">
+
+    <!-- Page Header -->
+    <div class="menu-header">
+        <h1>Our Menu</h1>
+        <p>Explore our handcrafted selection of dishes prepared fresh every day</p>
+    </div>
 
     <!-- Dynamic categories from database -->
-    <section class="category" th:each="entry : ${groupedProducts}">
-        <h2 th:text="${entry.key}">Category</h2>
-        <div class="card-grid">
+    <section class="menu-category stagger" th:each="entry : ${groupedProducts}">
+        <div class="category-header">
+            <h2 th:text="${entry.key}">Category</h2>
+            <span class="category-count" th:text="${#lists.size(entry.value)} + ' items'">0 items</span>
+        </div>
+        <div class="product-grid">
             <div class="product-card" th:each="product : ${entry.value}">
-                <i class="fa-solid fa-heart wishlist-icon"></i>
-                <img th:src="${product.imageUrl}" th:alt="${product.pname}" onerror="this.src='/Images/foodielogo.jfif'"/>
-                <div class="card-body">
-                    <div class="rating">
-                        <span th:each="i : ${#numbers.sequence(1, product.rating)}">&#9733;</span>
-                        <span th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(product.rating + 1, 5)}">&#9734;</span>
+                <div class="product-card-image">
+                    <img th:src="${product.imageUrl}" th:alt="${product.pname}" onerror="this.src='/Images/foodielogo.jfif'" loading="lazy"/>
+                    <button class="wishlist-btn" type="button" title="Add to wishlist">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-rating">
+                        <div class="stars">
+                            <span th:each="i : ${#numbers.sequence(1, product.rating)}"><i class="fa-solid fa-star"></i></span>
+                            <span class="empty" th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(product.rating + 1, 5)}"><i class="fa-solid fa-star"></i></span>
+                        </div>
+                        <span class="rating-value" th:text="${product.rating} + '.0'">4.0</span>
                     </div>
-                    <h3 th:text="${product.pname}">Product Name</h3>
-                    <p class="price">₹<span th:text="${product.pprice}">0</span></p>
-                    <a th:href="@{/login}" class="btn-buy">Buy Now</a>
+                    <h3 class="product-card-name" th:text="${product.pname}">Product Name</h3>
+                    <div class="product-card-footer">
+                        <div class="product-card-price">
+                            <span class="currency">&#8377;</span><span th:text="${product.pprice}">0</span>
+                        </div>
+                        <a th:href="@{/login}" class="btn-add-cart">
+                            <i class="fa-solid fa-arrow-right"></i> Order
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div th:if="${#maps.isEmpty(groupedProducts)}" style="text-align:center; padding:3rem; color:#999;">
-        <p>No products available yet. Check back soon!</p>
+    <!-- Empty State -->
+    <div class="menu-empty" th:if="${#maps.isEmpty(groupedProducts)}">
+        <div class="menu-empty-icon">
+            <i class="fa-solid fa-utensils"></i>
+        </div>
+        <h3>No dishes available yet</h3>
+        <p>We're working on adding amazing dishes. Check back soon!</p>
     </div>
-</div>
 
+</main>
+
+<footer th:replace="~{Navigation :: footer()}"></footer>
+
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

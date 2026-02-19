@@ -1,170 +1,232 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Admin Dashboard</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/Admin_Page.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
-<body>
+<body class="admin-page">
 
-<div class="admin-wrapper">
+<div class="admin-container">
 
-    <div class="admin-topbar">
-        <h1><i class="fa-solid fa-gauge-high"></i> Admin Dashboard — MealBox</h1>
-        <a th:href="@{/login}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <!-- ═══ Header ═════════════════════════════════════════ -->
+    <div class="admin-header">
+        <div class="admin-header-left">
+            <div class="admin-logo">
+                <div class="admin-logo-icon">
+                    <i class="fa-solid fa-bowl-food"></i>
+                </div>
+                <span class="admin-logo-text">Meal<span>Box</span></span>
+            </div>
+            <div class="admin-divider"></div>
+            <span class="admin-title">Dashboard</span>
+        </div>
+        <a th:href="@{/login}" class="btn btn-secondary btn-back">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </a>
     </div>
 
-    <!-- ── Admins Table ── -->
-    <section class="data-section">
-        <h2>Admins</h2>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Admin_Id</th>
-                    <th>Admin_Name</th>
-                    <th>Admin_Email</th>
-                    <th>Admin_Number</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="admin : ${admins}">
-                    <td th:text="${admin.adminId}"></td>
-                    <td th:text="${admin.adminName}"></td>
-                    <td th:text="${admin.adminEmail}"></td>
-                    <td th:text="${admin.adminNumber}"></td>
-                    <td class="actions">
-                        <a th:href="@{/updateAdmin/{id}(id=${admin.adminId})}" class="btn-icon edit-icon" title="Edit">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a th:href="@{/deleteAdmin/{id}(id=${admin.adminId})}" class="btn-icon delete-icon" title="Delete"
-                           onclick="return confirm('Delete this admin?')">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <a th:href="@{/addAdmin}" class="btn-add"><i class="fa-solid fa-plus"></i> Add_Admin</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </section>
+    <!-- ═══ Stats Cards ════════════════════════════════════ -->
+    <div class="admin-stats stagger">
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <div class="stat-card-icon orange">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+            </div>
+            <div class="stat-card-value" th:text="${admins != null ? #lists.size(admins) : 0}">0</div>
+            <div class="stat-card-label">Admins</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <div class="stat-card-icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+            <div class="stat-card-value" th:text="${users != null ? #lists.size(users) : 0}">0</div>
+            <div class="stat-card-label">Users</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <div class="stat-card-icon green">
+                    <i class="fa-solid fa-bowl-food"></i>
+                </div>
+            </div>
+            <div class="stat-card-value" th:text="${products != null ? #lists.size(products) : 0}">0</div>
+            <div class="stat-card-label">Products</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <div class="stat-card-icon purple">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+            </div>
+            <div class="stat-card-value" th:text="${orders != null ? #lists.size(orders) : 0}">0</div>
+            <div class="stat-card-label">Orders</div>
+        </div>
+    </div>
 
-    <!-- ── Users Table ── -->
-    <section class="data-section">
-        <h2>Users</h2>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>User_Id</th>
-                    <th>User_Name</th>
-                    <th>User_Email</th>
-                    <th>User_Number</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.u_id}"></td>
-                    <td th:text="${user.uname}"></td>
-                    <td th:text="${user.uemail}"></td>
-                    <td th:text="${user.unumber}"></td>
-                    <td class="actions">
-                        <a th:href="@{/updateUser/{id}(id=${user.u_id})}" class="btn-icon edit-icon" title="Edit">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a th:href="@{/deleteUser/{id}(id=${user.u_id})}" class="btn-icon delete-icon" title="Delete"
-                           onclick="return confirm('Delete this user?')">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <a th:href="@{/addUser}" class="btn-add"><i class="fa-solid fa-plus"></i> Add_User</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </section>
+    <!-- ═══ Admins Table ═══════════════════════════════════ -->
+    <div class="admin-section">
+        <div class="data-table-wrapper">
+            <div class="data-table-header">
+                <h3><i class="fa-solid fa-shield-halved"></i> Admins</h3>
+                <a th:href="@{/addAdmin}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-plus"></i> Add Admin
+                </a>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="admin : ${admins}">
+                        <td><span class="badge badge-primary" th:text="${admin.adminId}"></span></td>
+                        <td style="font-weight: 600; color: var(--color-text);" th:text="${admin.adminName}"></td>
+                        <td th:text="${admin.adminEmail}"></td>
+                        <td th:text="${admin.adminNumber}"></td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/updateAdmin/{id}(id=${admin.adminId})}" class="table-action-btn edit" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a th:href="@{/deleteAdmin/{id}(id=${admin.adminId})}" class="table-action-btn delete" title="Delete"
+                                   onclick="return confirm('Are you sure you want to delete this admin?')">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <!-- ── Products Table ── -->
-    <section class="data-section">
-        <h2>Products</h2>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price (₹)</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="product : ${products}">
-                    <td th:text="${product.pid}"></td>
-                    <td th:text="${product.pname}"></td>
-                    <td th:text="${product.pprice}"></td>
-                    <td th:text="${product.category}"></td>
-                    <td class="actions">
-                        <a th:href="@{/updateProduct/{id}(id=${product.pid})}" class="btn-icon edit-icon" title="Edit">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a th:href="@{/deleteProduct/{id}(id=${product.pid})}" class="btn-icon delete-icon" title="Delete"
-                           onclick="return confirm('Delete this product?')">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <a th:href="@{/addProduct}" class="btn-add"><i class="fa-solid fa-plus"></i> Add_Product</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </section>
+    <!-- ═══ Users Table ════════════════════════════════════ -->
+    <div class="admin-section">
+        <div class="data-table-wrapper">
+            <div class="data-table-header">
+                <h3><i class="fa-solid fa-users"></i> Users</h3>
+                <a th:href="@{/addUser}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </a>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td><span class="badge badge-primary" th:text="${user.u_id}"></span></td>
+                        <td style="font-weight: 600; color: var(--color-text);" th:text="${user.uname}"></td>
+                        <td th:text="${user.uemail}"></td>
+                        <td th:text="${user.unumber}"></td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/updateUser/{id}(id=${user.u_id})}" class="table-action-btn edit" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a th:href="@{/deleteUser/{id}(id=${user.u_id})}" class="table-action-btn delete" title="Delete"
+                                   onclick="return confirm('Are you sure you want to delete this user?')">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <!-- ── Orders Table ── -->
-    <section class="data-section">
-        <h2>Orders</h2>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>User_Name</th>
-                    <th>User_Email</th>
-                    <th>Product_Name</th>
-                    <th>Product_Price (₹)</th>
-                    <th>Product_Quantity</th>
-                    <th>Total_Amount (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="order : ${orders}">
-                    <td th:text="${order.user != null ? order.user.uname : 'N/A'}"></td>
-                    <td th:text="${order.user != null ? order.user.uemail : 'N/A'}"></td>
-                    <td th:text="${order.oName}"></td>
-                    <td th:text="${order.oPrice}"></td>
-                    <td th:text="${order.oQuantity}"></td>
-                    <td th:text="${order.totalAmmout}"></td>
-                    <td th:text="${order.orderDate}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <!-- ═══ Products Table ═════════════════════════════════ -->
+    <div class="admin-section">
+        <div class="data-table-wrapper">
+            <div class="data-table-header">
+                <h3><i class="fa-solid fa-bowl-food"></i> Products</h3>
+                <a th:href="@{/addProduct}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-plus"></i> Add Product
+                </a>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price (&#8377;)</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td><span class="badge badge-primary" th:text="${product.pid}"></span></td>
+                        <td style="font-weight: 600; color: var(--color-text);" th:text="${product.pname}"></td>
+                        <td>&#8377;<span th:text="${product.pprice}"></span></td>
+                        <td><span class="badge badge-warning" th:text="${product.category}"></span></td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/updateProduct/{id}(id=${product.pid})}" class="table-action-btn edit" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a th:href="@{/deleteProduct/{id}(id=${product.pid})}" class="table-action-btn delete" title="Delete"
+                                   onclick="return confirm('Are you sure you want to delete this product?')">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ═══ Orders Table ═══════════════════════════════════ -->
+    <div class="admin-section">
+        <div class="data-table-wrapper">
+            <div class="data-table-header">
+                <h3><i class="fa-solid fa-receipt"></i> Orders</h3>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>Product</th>
+                        <th>Price (&#8377;)</th>
+                        <th>Qty</th>
+                        <th>Total (&#8377;)</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td style="font-weight: 600; color: var(--color-text);" th:text="${order.user != null ? order.user.uname : 'N/A'}"></td>
+                        <td th:text="${order.user != null ? order.user.uemail : 'N/A'}"></td>
+                        <td th:text="${order.oName}"></td>
+                        <td>&#8377;<span th:text="${order.oPrice}"></span></td>
+                        <td><span class="badge badge-primary" th:text="${order.oQuantity}"></span></td>
+                        <td style="font-weight: 600; color: var(--color-success);">&#8377;<span th:text="${order.totalAmmout}"></span></td>
+                        <td th:text="${order.orderDate}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Add Product</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Add Product</title>
     <link rel="stylesheet" th:href="@{/css/Add_Product.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<div class="form-container">
-    <h2><i class="fa-solid fa-basket-shopping"></i> Add New Product</h2>
-    <form th:action="@{/addingProduct}" method="post">
-        <div class="form-group">
-            <label>Product Name</label>
-            <input type="text" name="pname" placeholder="e.g. Chicken Biryani" required/>
+<div class="form-page-wrapper">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-card-icon">
+                <i class="fa-solid fa-bowl-food"></i>
+            </div>
+            <h2>Add New Product</h2>
+            <p>Fill in the details to add a new dish to the menu</p>
         </div>
-        <div class="form-group">
-            <label>Price (₹)</label>
-            <input type="number" name="pprice" placeholder="e.g. 250" step="0.01" min="0" required/>
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea name="pdescription" placeholder="Short description of the product..." rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Category</label>
-            <input type="text" name="category" placeholder="e.g. Biryani, Paneer, Chicken, Chinese" required/>
-        </div>
-        <div class="form-group">
-            <label>Image URL</label>
-            <input type="text" name="imageUrl" placeholder="e.g. /Images/biryani/chicken-biryani.jpg"/>
-        </div>
-        <div class="form-group">
-            <label>Rating (1–5)</label>
-            <input type="number" name="rating" min="1" max="5" value="4"/>
-        </div>
-        <button type="submit" class="btn-submit">Add Product</button>
-        <a th:href="@{/admin/services}" class="btn-cancel">Cancel</a>
-    </form>
+
+        <form th:action="@{/addingProduct}" method="post">
+            <div class="form-group">
+                <label class="form-label">Product Name</label>
+                <input type="text" name="pname" class="form-input" placeholder="e.g. Chicken Biryani" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Price (&#8377;)</label>
+                <input type="number" name="pprice" class="form-input" placeholder="e.g. 250" step="0.01" min="0" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea name="pdescription" class="form-input form-textarea" placeholder="Brief description of the dish..." rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <input type="text" name="category" class="form-input" placeholder="e.g. Biryani, Paneer, Chinese" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Image URL</label>
+                <input type="text" name="imageUrl" class="form-input" placeholder="e.g. /Images/biryani/chicken-biryani.jpg"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Rating (1-5)</label>
+                <input type="number" name="rating" class="form-input" min="1" max="5" value="4"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-plus"></i> Add Product
+                </button>
+                <a th:href="@{/admin/services}" class="btn btn-secondary btn-block">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>

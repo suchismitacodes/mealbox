@@ -1,52 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Login</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Sign In</title>
     <link rel="stylesheet" th:href="@{/css/Login.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
-<body>
+<body class="auth-page">
 
-<div class="login-wrapper">
+<div class="auth-container">
 
-    <!-- Admin Login Panel -->
-    <div class="login-panel admin-panel">
-        <h2><i class="fa-solid fa-user-shield"></i> Admin Login</h2>
-        <form th:action="@{/adminLogin}" method="post" th:object="${adminLogin}">
-            <div class="form-group">
-                <label for="adminEmail">Email</label>
-                <input type="email" id="adminEmail" name="email" placeholder="admin@mealbox.com" required/>
-            </div>
-            <div class="form-group">
-                <label for="adminPassword">Password</label>
-                <input type="password" id="adminPassword" name="password" placeholder="••••••••" required/>
-            </div>
-            <p class="error-msg" th:if="${error}" th:text="${error}"></p>
-            <button type="submit" class="btn-login">Login as Admin</button>
-        </form>
+    <!-- Logo -->
+    <a th:href="@{/home}" class="auth-logo">
+        <span class="auth-logo-icon">
+            <i class="fa-solid fa-bowl-food"></i>
+        </span>
+        <span class="auth-logo-text">Meal<span>Box</span></span>
+    </a>
+
+    <!-- Tab Switcher -->
+    <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="user" type="button">
+            <i class="fa-solid fa-user"></i> Customer
+        </button>
+        <button class="auth-tab" data-tab="admin" type="button">
+            <i class="fa-solid fa-shield-halved"></i> Admin
+        </button>
     </div>
 
-    <!-- User Login Panel -->
-    <div class="login-panel user-panel">
-        <h2><i class="fa-solid fa-user"></i> User Login</h2>
-        <form th:action="@{/userLogin}" method="post">
-            <div class="form-group">
-                <label for="userEmail">Email</label>
-                <input type="email" id="userEmail" name="userEmail" placeholder="user@email.com" required/>
+    <!-- Panels -->
+    <div class="auth-panels">
+
+        <!-- User Login Panel -->
+        <div class="auth-panel active" id="panel-user">
+            <div class="auth-card">
+                <div class="auth-card-header">
+                    <h2>Welcome back</h2>
+                    <p>Sign in to your account to continue ordering</p>
+                </div>
+
+                <div class="auth-error" th:if="${error2}">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span th:text="${error2}">Error message</span>
+                </div>
+
+                <form th:action="@{/userLogin}" method="post">
+                    <div class="auth-field">
+                        <label for="userEmail">Email address</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="userEmail" name="userEmail" placeholder="you@email.com" required/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label for="userPassword">Password</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="userPassword" name="userPassword"
+                                   minlength="4" maxlength="8" placeholder="Enter your password" required/>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-submit">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    New to MealBox? <a th:href="@{/register}">Create an account</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="userPassword">Password</label>
-                <input type="password" id="userPassword" name="userPassword"
-                       minlength="4" maxlength="8" placeholder="4–8 characters" required/>
+        </div>
+
+        <!-- Admin Login Panel -->
+        <div class="auth-panel" id="panel-admin">
+            <div class="auth-card">
+                <div class="auth-card-header">
+                    <h2>Admin Portal</h2>
+                    <p>Access the management dashboard</p>
+                </div>
+
+                <div class="auth-error" th:if="${error}">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span th:text="${error}">Error message</span>
+                </div>
+
+                <form th:action="@{/adminLogin}" method="post" th:object="${adminLogin}">
+                    <div class="auth-field">
+                        <label for="adminEmail">Admin Email</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="adminEmail" name="email" placeholder="admin@mealbox.com" required/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label for="adminPassword">Password</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="adminPassword" name="password" placeholder="Enter admin password" required/>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-submit">
+                        <i class="fa-solid fa-shield-halved"></i> Access Dashboard
+                    </button>
+                </form>
             </div>
-            <p class="error-msg" th:if="${error2}" th:text="${error2}"></p>
-            <button type="submit" class="btn-login">Login as User</button>
-        </form>
-        <p class="register-link">New here? <a th:href="@{/register}">Register</a></p>
+        </div>
+
     </div>
 
+    <a th:href="@{/home}" class="auth-back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to home
+    </a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.auth-tab');
+        const panels = document.querySelectorAll('.auth-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('panel-' + this.dataset.tab).classList.add('active');
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

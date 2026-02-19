@@ -1,41 +1,197 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Home</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Delicious Food, Delivered Fast</title>
     <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
     <link rel="stylesheet" th:href="@{/css/Home.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<nav th:replace="~{Navigation::navbar()}"></nav>
+<nav th:replace="~{Navigation :: navbar()}"></nav>
 
-<div class="hero">
-    <div class="hero-content">
-        <h1>WELCOME TO OUR WEBSITE</h1>
-        <p>Delicious food delivered right to your door. Order your favourite meals online!</p>
-        <a th:href="@{/products}" class="btn-primary">Explore Menu</a>
-    </div>
-</div>
+<!-- ═══ Hero ════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-inner container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-circle"></i>
+                No. 1 Food Delivery Platform
+            </div>
+            <h1 class="hero-title">
+                Your Favorite Meals,<br/>
+                <span class="highlight">Delivered Fresh</span>
+            </h1>
+            <p class="hero-description">
+                Order from hundreds of restaurants with easy checkout,
+                real-time tracking, and delivery in minutes. Fresh food,
+                always on time.
+            </p>
+            <div class="hero-actions">
+                <a th:href="@{/products}" class="btn btn-primary hero-cta">
+                    <i class="fa-solid fa-utensils"></i> Explore Menu
+                </a>
+                <a th:href="@{/about}" class="hero-secondary-cta">
+                    Learn more <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
 
-<section class="features">
-    <div class="feature-card">
-        <i class="fa-solid fa-utensils"></i>
-        <h3>Fresh Food</h3>
-        <p>Made fresh from quality ingredients every day.</p>
-    </div>
-    <div class="feature-card">
-        <i class="fa-solid fa-truck-fast"></i>
-        <h3>Fast Delivery</h3>
-        <p>Order now and receive your meal in minutes.</p>
-    </div>
-    <div class="feature-card">
-        <i class="fa-solid fa-star"></i>
-        <h3>Top Rated</h3>
-        <p>Loved by thousands of happy customers.</p>
+        <div class="hero-visual">
+            <div class="hero-image-wrapper">
+                <div class="hero-image-blob">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+                <div class="hero-float-badge">
+                    <div class="badge-icon orange"><i class="fa-solid fa-fire"></i></div>
+                    <span>Fresh &amp; Hot</span>
+                </div>
+                <div class="hero-float-badge">
+                    <div class="badge-icon green"><i class="fa-solid fa-clock"></i></div>
+                    <span>30 min delivery</span>
+                </div>
+                <div class="hero-float-badge">
+                    <div class="badge-icon blue"><i class="fa-solid fa-star"></i></div>
+                    <span>4.9 Rating</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
+<!-- ═══ Trust Bar ═══════════════════════════════════════ -->
+<section class="trust-bar">
+    <div class="trust-stats container stagger">
+        <div class="trust-stat">
+            <div class="trust-stat-value">10<span>K+</span></div>
+            <div class="trust-stat-label">Happy Customers</div>
+        </div>
+        <div class="trust-stat">
+            <div class="trust-stat-value">500<span>+</span></div>
+            <div class="trust-stat-label">Unique Dishes</div>
+        </div>
+        <div class="trust-stat">
+            <div class="trust-stat-value">30<span>min</span></div>
+            <div class="trust-stat-label">Avg. Delivery</div>
+        </div>
+        <div class="trust-stat">
+            <div class="trust-stat-value">4.9<span>/5</span></div>
+            <div class="trust-stat-label">User Rating</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ How It Works ═══════════════════════════════════ -->
+<section class="how-it-works">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Simple Process
+            </div>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps to get delicious food delivered to your door</p>
+        </div>
+        <div class="steps-grid stagger">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3>Browse Menu</h3>
+                <p>Explore our diverse menu with hundreds of dishes from multiple cuisines and categories.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h3>Place Order</h3>
+                <p>Choose your favorites, pick a quantity, and place your order with a single click.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <h3>Fast Delivery</h3>
+                <p>Sit back and relax. Your freshly prepared meal arrives hot at your doorstep.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Features ════════════════════════════════════════ -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fa-solid fa-sparkles"></i> Why MealBox
+            </div>
+            <h2 class="section-title">Crafted for Food Lovers</h2>
+            <p class="section-subtitle">Everything you need for the perfect food delivery experience</p>
+        </div>
+        <div class="features-grid stagger">
+            <div class="feature-card">
+                <div class="feature-icon orange">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                </div>
+                <h3>Always Fresh</h3>
+                <p>Every meal is prepared with premium ingredients and cooked fresh when you order.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon green">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3>Lightning Fast</h3>
+                <p>Average delivery time under 30 minutes. Track every step of your order in real time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon blue">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Safe &amp; Secure</h3>
+                <p>Contactless delivery with tamper-proof packaging. Your safety is guaranteed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon amber">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <h3>Top Rated</h3>
+                <p>Rated 4.9/5 by our customers. Join thousands who trust MealBox for their daily meals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon green">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h3>Dietary Options</h3>
+                <p>Vegetarian, vegan, gluten-free — we cater to every dietary preference and requirement.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon orange">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our support team is available round the clock. Any issue, resolved in minutes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA ═════════════════════════════════════════════ -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <h2>Ready to Order?</h2>
+            <p>Join thousands of happy customers. Your next favorite meal is just a click away.</p>
+            <a th:href="@{/products}" class="cta-btn">
+                <i class="fa-solid fa-utensils"></i> Start Ordering
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{Navigation :: footer()}"></footer>
+
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

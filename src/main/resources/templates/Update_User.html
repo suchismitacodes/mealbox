@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Update User</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Update User</title>
     <link rel="stylesheet" th:href="@{/css/Update_User.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<div class="form-container">
-    <h2><i class="fa-solid fa-user-pen"></i> Update User</h2>
-    <form th:action="@{/updatingUser/{id}(id=${user.u_id})}" method="get">
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" name="uname" th:value="${user.uname}" required/>
+<div class="form-page-wrapper">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-card-icon">
+                <i class="fa-solid fa-user-pen"></i>
+            </div>
+            <h2>Update User</h2>
+            <p>Modify the user details below</p>
         </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="uemail" th:value="${user.uemail}" required/>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="upassword" th:value="${user.upassword}"/>
-        </div>
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="number" name="unumber" th:value="${user.unumber}"/>
-        </div>
-        <button type="submit" class="btn-submit">Update User</button>
-        <a th:href="@{/admin/services}" class="btn-cancel">Cancel</a>
-    </form>
+
+        <form th:action="@{/updatingUser/{id}(id=${user.u_id})}" method="get">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="uname" class="form-input" th:value="${user.uname}" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" name="uemail" class="form-input" th:value="${user.uemail}" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="upassword" class="form-input" th:value="${user.upassword}"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" name="unumber" class="form-input" th:value="${user.unumber}"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-check"></i> Update User
+                </button>
+                <a th:href="@{/admin/services}" class="btn btn-secondary btn-block">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>

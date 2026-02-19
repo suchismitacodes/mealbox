@@ -1,123 +1,175 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Order Food</title>
-    <link rel="stylesheet" th:href="@{/css/BuyProduct.css}"/>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Order Food</title>
     <link rel="stylesheet" th:href="@{/css/Products.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/BuyProduct.css}"/>
 </head>
 <body>
 
-<div class="buy-page">
+<main class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-16); max-width: 1100px;">
 
-    <!-- Header -->
-    <div class="buy-header">
-        <marquee class="welcome-marquee">Welcome Back <span th:text="${name}">User</span> !</marquee>
-        <a th:href="@{/login}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Logout</a>
+    <!-- ═══ User Welcome Header ═══════════════════════════ -->
+    <div class="user-header">
+        <div class="user-header-info">
+            <div class="user-avatar" th:text="${name != null ? name.substring(0,1).toUpperCase() : 'U'}">U</div>
+            <div class="user-header-text">
+                <h2>Welcome back, <span th:text="${name}">User</span></h2>
+                <p>What would you like to eat today?</p>
+            </div>
+        </div>
+        <a th:href="@{/login}" class="btn-logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </a>
     </div>
 
-    <!-- Menu Section — browse & order from DB products -->
-    <div class="products-page">
-        <h1 class="page-title">Our Menu</h1>
+    <!-- ═══ Menu Section ═══════════════════════════════════ -->
+    <div class="menu-header" style="padding-top: 0;">
+        <h1>Our Menu</h1>
+        <p>Browse our dishes and order with a single click</p>
+    </div>
 
-        <section class="category" th:each="entry : ${groupedProducts}">
+    <section class="menu-category stagger" th:each="entry : ${groupedProducts}">
+        <div class="category-header">
             <h2 th:text="${entry.key}">Category</h2>
-            <div class="card-grid">
-                <div class="product-card" th:each="product : ${entry.value}">
-                    <img th:src="${product.imageUrl}" th:alt="${product.pname}" onerror="this.src='/Images/foodielogo.jfif'"/>
-                    <div class="card-body">
-                        <div class="rating">
-                            <span th:each="i : ${#numbers.sequence(1, product.rating)}">&#9733;</span>
-                            <span th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(product.rating + 1, 5)}">&#9734;</span>
+            <span class="category-count" th:text="${#lists.size(entry.value)} + ' items'">0 items</span>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" th:each="product : ${entry.value}">
+                <div class="product-card-image">
+                    <img th:src="${product.imageUrl}" th:alt="${product.pname}" onerror="this.src='/Images/foodielogo.jfif'" loading="lazy"/>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-rating">
+                        <div class="stars">
+                            <span th:each="i : ${#numbers.sequence(1, product.rating)}"><i class="fa-solid fa-star"></i></span>
+                            <span class="empty" th:if="${product.rating < 5}" th:each="i : ${#numbers.sequence(product.rating + 1, 5)}"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <h3 th:text="${product.pname}">Product Name</h3>
-                        <p class="price">₹<span th:text="${product.pprice}">0</span></p>
-                        <p class="product-desc" th:text="${product.pdescription}">Description</p>
-                        <!-- Quick order form -->
-                        <form th:action="@{/product/order}" method="post" class="quick-order-form">
-                            <input type="hidden" name="oName" th:value="${product.pname}"/>
-                            <input type="hidden" name="oPrice" th:value="${product.pprice}"/>
-                            <div class="qty-row">
-                                <label>Qty:</label>
-                                <input type="number" name="oQuantity" min="1" value="1" class="qty-input"/>
-                            </div>
-                            <button type="submit" class="btn-buy">Order Now</button>
-                        </form>
+                        <span class="rating-value" th:text="${product.rating} + '.0'">4.0</span>
                     </div>
+                    <h3 class="product-card-name" th:text="${product.pname}">Product Name</h3>
+                    <p class="product-card-desc" th:text="${product.pdescription}">Description</p>
+                    <div class="product-card-footer">
+                        <div class="product-card-price">
+                            <span class="currency">&#8377;</span><span th:text="${product.pprice}">0</span>
+                        </div>
+                    </div>
+                    <form th:action="@{/product/order}" method="post" class="quick-order-form">
+                        <input type="hidden" name="oName" th:value="${product.pname}"/>
+                        <input type="hidden" name="oPrice" th:value="${product.pprice}"/>
+                        <div class="qty-control">
+                            <button type="button" onclick="this.parentNode.querySelector('input').stepDown()" aria-label="Decrease">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input type="number" name="oQuantity" min="1" value="1" aria-label="Quantity"/>
+                            <button type="button" onclick="this.parentNode.querySelector('input').stepUp()" aria-label="Increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <button type="submit" class="quick-order-btn">
+                            <i class="fa-solid fa-bag-shopping"></i> Order
+                        </button>
+                    </form>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <!-- Search Section (optional — still available) -->
+    <!-- ═══ Search Section ═════════════════════════════════ -->
     <div class="search-section">
-        <h2>Search for a Product</h2>
+        <h2><i class="fa-solid fa-magnifying-glass"></i> Search for a dish</h2>
         <form th:action="@{/product/search}" method="post" class="search-form">
-            <input type="text" name="productName" placeholder="Enter product name..." required class="search-input"/>
-            <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="productName" placeholder="Type a dish name..." required/>
+            </div>
+            <button type="submit" class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
         </form>
 
         <!-- Unavailable message -->
-        <p class="unavailable-msg" th:if="${message}" th:text="${message}"></p>
+        <div class="search-message error" th:if="${message}">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span th:text="${message}">Not available</span>
+        </div>
 
         <!-- Product Result & Order Form -->
-        <div class="product-result" th:if="${product != null}">
-            <div class="product-info-card">
+        <div class="search-result" th:if="${product != null}">
+            <div class="search-result-info">
                 <h3 th:text="${product.pname}">Product Name</h3>
-                <p>Price: ₹<span th:text="${product.pprice}">0.0</span></p>
+                <p><strong>Price:</strong> &#8377;<span th:text="${product.pprice}">0.0</span></p>
                 <p th:text="${product.pdescription}">Description</p>
             </div>
-
-            <form th:action="@{/product/order}" method="post" class="order-form">
+            <div class="search-order-form">
                 <h3>Place Your Order</h3>
-                <div class="form-group">
-                    <label>Product Name</label>
-                    <input type="text" name="oName" th:value="${product.pname}" readonly class="readonly-input"/>
-                </div>
-                <div class="form-group">
-                    <label>Price (₹)</label>
-                    <input type="number" name="oPrice" th:value="${product.pprice}" readonly step="0.01" class="readonly-input"/>
-                </div>
-                <div class="form-group">
-                    <label>Quantity</label>
-                    <input type="number" name="oQuantity" min="1" value="1" required class="qty-input"/>
-                </div>
-                <button type="submit" class="btn-order">Order Now</button>
-            </form>
+                <form th:action="@{/product/order}" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Product</label>
+                        <input type="text" name="oName" th:value="${product.pname}" readonly class="form-input"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price (&#8377;)</label>
+                        <input type="number" name="oPrice" th:value="${product.pprice}" readonly step="0.01" class="form-input"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" name="oQuantity" min="1" value="1" required class="form-input"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-bag-shopping"></i> Place Order
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Order History -->
-    <div class="order-history" th:if="${orders != null and !#lists.isEmpty(orders)}">
-        <h2>Your Order History</h2>
-        <table class="order-table">
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Price (₹)</th>
-                    <th>Quantity</th>
-                    <th>Total (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="order : ${orders}">
-                    <td th:text="${order.oName}">-</td>
-                    <td th:text="${order.oPrice}">-</td>
-                    <td th:text="${order.oQuantity}">-</td>
-                    <td th:text="${order.totalAmmout}">-</td>
-                    <td th:text="${order.orderDate}">-</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- ═══ Order History ══════════════════════════════════ -->
+    <div class="order-history-section" th:if="${orders != null and !#lists.isEmpty(orders)}">
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> Order History</h2>
+        <div class="data-table-wrapper">
+            <div class="data-table-header" style="display:none;"></div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price (&#8377;)</th>
+                        <th>Qty</th>
+                        <th>Total (&#8377;)</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td>
+                            <span style="font-weight: 600; color: var(--color-text);" th:text="${order.oName}">-</span>
+                        </td>
+                        <td th:text="${order.oPrice}">-</td>
+                        <td>
+                            <span class="badge badge-primary" th:text="${order.oQuantity}">-</span>
+                        </td>
+                        <td>
+                            <span style="font-weight: 600; color: var(--color-primary);" th:text="'&#8377;' + ${order.totalAmmout}">-</span>
+                        </td>
+                        <td th:text="${order.orderDate}">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="no-orders" th:if="${orders == null or #lists.isEmpty(orders)}">
-        <p>No orders placed yet.</p>
+    <!-- Empty orders -->
+    <div class="empty-state" th:if="${orders == null or #lists.isEmpty(orders)}" style="margin-top: var(--space-8);">
+        <div class="empty-state-icon">
+            <i class="fa-solid fa-receipt"></i>
+        </div>
+        <h3>No orders yet</h3>
+        <p>Your order history will appear here once you place your first order</p>
     </div>
 
-</div>
+</main>
 
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

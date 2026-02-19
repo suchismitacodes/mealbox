@@ -1,42 +1,90 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Locate Us</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Locate Us</title>
     <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
     <link rel="stylesheet" th:href="@{/css/Locate_us.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<nav th:replace="~{Navigation::navbar()}"></nav>
+    <!-- Navbar -->
+    <nav th:replace="~{Navigation :: navbar()}"></nav>
 
-<div class="locate-page">
-    <h1><i class="fa-solid fa-location-dot"></i> Find Us</h1>
+    <!-- Hero -->
+    <section class="locate-hero">
+        <h1><i class="fa-solid fa-location-dot"></i>&nbsp; Find Us</h1>
+        <p>Visit one of our branches or order online — we're always nearby.</p>
+    </section>
 
-    <div class="location-cards">
-        <div class="location-card">
-            <i class="fa-solid fa-store"></i>
-            <h3>Main Branch</h3>
-            <p>123, Food Street, Koramangala</p>
-            <p>Bengaluru, Karnataka — 560034</p>
-            <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
-            <p><i class="fa-solid fa-clock"></i> Mon–Sun: 9 AM – 11 PM</p>
+    <!-- Location Cards -->
+    <section class="locate-section">
+        <h2 class="section-title">Our Branches</h2>
+
+        <div class="locations-grid">
+            <!-- Main Branch -->
+            <div class="location-card">
+                <div class="card-header">
+                    <div class="store-icon">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3>Main Branch</h3>
+                    <span class="badge badge-success">Open Now</span>
+                </div>
+                <div class="location-details">
+                    <div class="detail-row">
+                        <i class="fa-solid fa-map-pin"></i>
+                        <span>123, Food Street, Koramangala<br/>Bengaluru, Karnataka — 560034</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+91 98765 43210</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Mon – Sun: 9 AM – 11 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- City Branch -->
+            <div class="location-card">
+                <div class="card-header">
+                    <div class="store-icon">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3>City Branch</h3>
+                    <span class="badge badge-success">Open Now</span>
+                </div>
+                <div class="location-details">
+                    <div class="detail-row">
+                        <i class="fa-solid fa-map-pin"></i>
+                        <span>45, MG Road, Indiranagar<br/>Bengaluru, Karnataka — 560008</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+91 98765 12345</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Mon – Sun: 10 AM – 10 PM</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="location-card">
-            <i class="fa-solid fa-store"></i>
-            <h3>City Branch</h3>
-            <p>45, MG Road, Indiranagar</p>
-            <p>Bengaluru, Karnataka — 560008</p>
-            <p><i class="fa-solid fa-phone"></i> +91 98765 12345</p>
-            <p><i class="fa-solid fa-clock"></i> Mon–Sun: 10 AM – 10 PM</p>
+    </section>
+
+    <!-- Map Placeholder -->
+    <section class="map-section">
+        <div class="map-placeholder">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <p>Interactive map coming soon</p>
         </div>
-    </div>
+    </section>
 
-    <div class="map-placeholder">
-        <p><i class="fa-solid fa-map"></i> Map integration coming soon...</p>
-    </div>
-</div>
+    <!-- Footer -->
+    <footer th:replace="~{Navigation :: footer()}"></footer>
 
+    <script th:src="@{/js/app.js}"></script>
 </body>
 </html>

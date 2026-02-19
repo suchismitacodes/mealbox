@@ -1,41 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — About Us</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — About Us</title>
     <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
     <link rel="stylesheet" th:href="@{/css/About.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<nav th:replace="~{Navigation::navbar()}"></nav>
+    <!-- Navbar -->
+    <nav th:replace="~{Navigation :: navbar()}"></nav>
 
-<div class="about-page">
+    <!-- Hero -->
     <section class="about-hero">
         <h1>About MealBox</h1>
-        <p>We are passionate about bringing you the best food experience from the comfort of your home.</p>
+        <p>We're passionate about bringing you the best food experience — from the comfort of your home to the last bite on your plate.</p>
     </section>
 
-    <section class="about-content">
-        <div class="about-card">
-            <i class="fa-solid fa-bowl-food"></i>
-            <h3>Our Story</h3>
-            <p>Founded in 2024, MealBox started with a simple idea: great food should be accessible to everyone.
-               We partner with the finest local restaurants and chefs to bring you restaurant-quality meals delivered fast.</p>
+    <!-- Values -->
+    <section class="about-values">
+        <div class="section-header">
+            <h2>What Drives Us</h2>
+            <p>Built on three pillars that define everything we do.</p>
         </div>
-        <div class="about-card">
-            <i class="fa-solid fa-heart"></i>
-            <h3>Our Mission</h3>
-            <p>To make every meal special. We are committed to quality, freshness, and customer satisfaction above everything else.</p>
-        </div>
-        <div class="about-card">
-            <i class="fa-solid fa-users"></i>
-            <h3>Our Team</h3>
-            <p>A dedicated team of food enthusiasts, technologists, and delivery professionals working together around the clock.</p>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-bowl-food"></i>
+                </div>
+                <h3>Our Story</h3>
+                <p>Founded in 2024, MealBox started with a simple idea: great food should be accessible to everyone. We partner with the finest local restaurants and chefs to bring you restaurant-quality meals delivered fast.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3>Our Mission</h3>
+                <p>To make every meal special. We are committed to quality, freshness, and customer satisfaction above everything else — because food is more than fuel, it's an experience.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h3>Our Team</h3>
+                <p>A dedicated team of food enthusiasts, technologists, and delivery professionals working together around the clock to bring joy to your table.</p>
+            </div>
         </div>
     </section>
-</div>
 
+    <!-- Stats -->
+    <section class="about-stats">
+        <div class="stats-inner">
+            <div class="stat-item">
+                <h3>10K+</h3>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Menu Items</p>
+            </div>
+            <div class="stat-item">
+                <h3>30min</h3>
+                <p>Avg. Delivery</p>
+            </div>
+            <div class="stat-item">
+                <h3>4.9</h3>
+                <p>Customer Rating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+        <div class="cta-card">
+            <h2>Ready to Order?</h2>
+            <p>Explore our menu and discover your new favourite dish today.</p>
+            <a th:href="@{/home}" class="btn btn-primary">
+                <i class="fa-solid fa-utensils"></i>&nbsp; Explore Menu
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer th:replace="~{Navigation :: footer()}"></footer>
+
+    <script th:src="@{/js/app.js}"></script>
 </body>
 </html>

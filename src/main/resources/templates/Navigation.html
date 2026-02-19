@@ -1,25 +1,104 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" th:href="@{/css/Navigation.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-</head>
 <body>
+
+<!-- ═══ Navbar Fragment ═══════════════════════════════════ -->
 <nav th:fragment="navbar()">
-    <div class="nav-container">
-        <div class="logo">
-            <img th:src="@{/Images/foodielogo.jfif}" alt="Mealbox Logo" class="logo-img"/>
-            <span class="brand-name">MealBox</span>
+    <div class="navbar" id="navbar">
+        <div class="nav-inner container">
+            <a th:href="@{/home}" class="nav-logo">
+                <span class="nav-logo-icon">
+                    <i class="fa-solid fa-bowl-food"></i>
+                </span>
+                <span class="nav-logo-text">Meal<span>Box</span></span>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a th:href="@{/home}" class="nav-link">Home</a></li>
+                <li><a th:href="@{/products}" class="nav-link">Menu</a></li>
+                <li><a th:href="@{/location}" class="nav-link">Locations</a></li>
+                <li><a th:href="@{/about}" class="nav-link">About</a></li>
+                <li class="mobile-login-btn">
+                    <a th:href="@{/login}" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <a th:href="@{/login}" class="btn btn-primary nav-login-btn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+                </a>
+                <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-        <ul class="nav-links">
-            <li><a th:href="@{/home}">Home</a></li>
-            <li><a th:href="@{/products}">Products</a></li>
-            <li><a th:href="@{/location}">Locate Us</a></li>
-            <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/login}" class="login-btn">Log In</a></li>
-        </ul>
     </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-overlay" id="navOverlay"></div>
 </nav>
+
+<!-- ═══ Footer Fragment ═══════════════════════════════════ -->
+<footer th:fragment="footer()">
+    <div class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h3><i class="fa-solid fa-bowl-food"></i> MealBox</h3>
+                    <p>Delicious meals delivered to your doorstep. Fresh ingredients, incredible flavors, lightning-fast delivery.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a th:href="@{/home}">Home</a></li>
+                        <li><a th:href="@{/products}">Menu</a></li>
+                        <li><a th:href="@{/about}">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a th:href="@{/location}">Locations</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider"/>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MealBox. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══ Head Fragment ═════════════════════════════════════ -->
+<th:block th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/svg+xml" href="https://emjcn.arghya.dev/e/%F0%9F%8D%9B"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/global.css}"/>
+</th:block>
+
 </body>
 </html>

@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Error</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Something Went Wrong</title>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
-<body>
+<body class="status-page">
 
-<div class="error-container">
-    <div class="error-card">
-        <i class="fa-solid fa-triangle-exclamation error-icon"></i>
-        <h1>500 — Something Went Wrong</h1>
-        <p>An unexpected error occurred. Our team has been notified.</p>
-        <a href="/home" class="btn-back"><i class="fa-solid fa-house"></i> Go to Home</a>
+    <div class="status-container">
+        <div class="status-card error-card">
+            <!-- Animated Error Icon -->
+            <div class="status-icon error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h1 class="error-title">Something Went Wrong</h1>
+
+            <p class="status-message">
+                We encountered an unexpected error while processing your request. Please try again or contact our support team if the problem persists.
+            </p>
+
+            <!-- Actions -->
+            <div class="status-actions">
+                <a th:href="@{/home}" class="btn btn-primary">
+                    <i class="fa-solid fa-house"></i>&nbsp; Back to Home
+                </a>
+                <a th:href="@{/product/back}" class="btn btn-ghost">
+                    <i class="fa-solid fa-utensils"></i>&nbsp; Browse Products
+                </a>
+            </div>
+        </div>
     </div>
-</div>
 
 </body>
 </html>

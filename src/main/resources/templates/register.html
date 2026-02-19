@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Register</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Create Account</title>
     <link rel="stylesheet" th:href="@{/css/Login.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
-<body>
+<body class="auth-page">
 
-<div class="login-wrapper register-wrapper">
-    <div class="login-panel user-panel">
-        <h2><i class="fa-solid fa-user-plus"></i> Create Account</h2>
-        <form th:action="@{/register}" method="post">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" name="uname" placeholder="Your full name" required/>
+<div class="auth-container">
+
+    <!-- Logo -->
+    <a th:href="@{/home}" class="auth-logo">
+        <span class="auth-logo-icon">
+            <i class="fa-solid fa-bowl-food"></i>
+        </span>
+        <span class="auth-logo-text">Meal<span>Box</span></span>
+    </a>
+
+    <!-- Registration Card -->
+    <div class="auth-panels" style="max-width: 440px;">
+        <div class="auth-panel active">
+            <div class="auth-card register-card">
+                <div class="auth-card-header">
+                    <h2>Create your account</h2>
+                    <p>Join MealBox and start ordering delicious meals</p>
+                </div>
+
+                <form th:action="@{/register}" method="post">
+                    <div class="auth-field">
+                        <label>Full Name</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="uname" placeholder="Enter your full name" required/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Email Address</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" name="uemail" placeholder="you@email.com" required/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Password</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" name="upassword" placeholder="4 to 8 characters"
+                                   minlength="4" maxlength="8" required/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Phone Number</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" name="unumber" placeholder="10-digit phone number"
+                                   pattern="[0-9]{10}" title="Please enter a 10-digit phone number"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-submit">
+                        <i class="fa-solid fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    Already have an account? <a th:href="@{/login}">Sign in</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="uemail" placeholder="user@email.com" required/>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="upassword" placeholder="4–8 characters"
-                       minlength="4" maxlength="8" required/>
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="number" name="unumber" placeholder="10-digit number"/>
-            </div>
-            <button type="submit" class="btn-login">Register</button>
-        </form>
-        <p class="register-link">Already have an account? <a th:href="@{/login}">Login</a></p>
+        </div>
     </div>
+
+    <a th:href="@{/home}" class="auth-back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to home
+    </a>
 </div>
 
 </body>

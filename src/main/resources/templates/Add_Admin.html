@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Mealbox — Add Admin</title>
+    <th:block th:replace="~{Navigation :: head}"/>
+    <title>MealBox — Add Admin</title>
     <link rel="stylesheet" th:href="@{/css/Add_Admin.css}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
 
-<div class="form-container">
-    <h2><i class="fa-solid fa-user-plus"></i> Add New Admin</h2>
-    <form th:action="@{/addingAdmin}" method="post">
-        <div class="form-group">
-            <label>Admin Name</label>
-            <input type="text" name="adminName" placeholder="Full name" required/>
+<div class="form-page-wrapper">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-card-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2>Add New Admin</h2>
+            <p>Grant admin access to a new team member</p>
         </div>
-        <div class="form-group">
-            <label>Admin Email</label>
-            <input type="email" name="adminEmail" placeholder="admin@email.com" required/>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="adminPassword" placeholder="••••••••" required/>
-        </div>
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" name="adminNumber" placeholder="10-digit number"/>
-        </div>
-        <button type="submit" class="btn-submit">Add Admin</button>
-        <a th:href="@{/admin/services}" class="btn-cancel">Cancel</a>
-    </form>
+
+        <form th:action="@{/addingAdmin}" method="post">
+            <div class="form-group">
+                <label class="form-label">Admin Name</label>
+                <input type="text" name="adminName" class="form-input" placeholder="Enter full name" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Admin Email</label>
+                <input type="email" name="adminEmail" class="form-input" placeholder="admin@mealbox.com" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="adminPassword" class="form-input" placeholder="Enter a secure password" required/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="text" name="adminNumber" class="form-input" placeholder="10-digit phone number"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-shield-halved"></i> Add Admin
+                </button>
+                <a th:href="@{/admin/services}" class="btn btn-secondary btn-block">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>
