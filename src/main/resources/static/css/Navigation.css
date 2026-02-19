@@ -1,0 +1,74 @@
+/* Navigation.css — MealBox navigation bar */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff6600;
+    padding: 0.8rem 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.brand-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 0.3rem 0.5rem;
+}
+
+.nav-links a:hover {
+    color: #ffe0b2;
+}
+
+.login-btn {
+    background-color: #fff;
+    color: #ff6600 !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: 20px;
+    font-weight: 600 !important;
+    transition: background-color 0.2s, color 0.2s !important;
+}
+
+.login-btn:hover {
+    background-color: #ffe0b2 !important;
+}

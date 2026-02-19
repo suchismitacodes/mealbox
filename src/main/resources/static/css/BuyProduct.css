@@ -1,0 +1,267 @@
+/* BuyProduct.css — MealBox buy/order page */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f4ef;
+}
+
+.buy-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.buy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff6600;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.welcome-marquee {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: #fff;
+    color: #ff6600;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+    background-color: #ffe0b2;
+}
+
+.search-section {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+}
+
+.search-section h2 {
+    font-size: 1.5rem;
+    color: #ff6600;
+    margin-bottom: 1rem;
+}
+
+.search-form {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: #ff6600;
+}
+
+.btn-search {
+    padding: 0.7rem 1.5rem;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-search:hover {
+    background-color: #e55a00;
+}
+
+.unavailable-msg {
+    color: #c62828;
+    background-color: #ffebee;
+    border-left: 4px solid #e53935;
+    padding: 0.8rem 1rem;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.product-result {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.product-info-card {
+    background-color: #fff8f2;
+    border: 1px solid #ffd0a8;
+    border-radius: 12px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.product-info-card h3 {
+    font-size: 1.3rem;
+    color: #ff6600;
+    margin-bottom: 0.5rem;
+}
+
+.product-info-card p {
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+.order-form {
+    flex: 1;
+    min-width: 200px;
+}
+
+.order-form h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.readonly-input {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.qty-input {
+    width: 100px !important;
+}
+
+.btn-order {
+    padding: 0.7rem 2rem;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-order:hover {
+    background-color: #e55a00;
+}
+
+.order-history {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.order-history h2 {
+    font-size: 1.5rem;
+    color: #ff6600;
+    margin-bottom: 1rem;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.order-table thead tr {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.order-table th, .order-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0e0d0;
+}
+
+.order-table tbody tr:hover {
+    background-color: #fff8f2;
+}
+
+.no-orders {
+    text-align: center;
+    color: #999;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* Quick order form inside product cards */
+.quick-order-form {
+    margin-top: 0.6rem;
+}
+
+.qty-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.qty-row label {
+    font-weight: 600;
+    color: #444;
+    font-size: 0.85rem;
+}
+
+.qty-row .qty-input {
+    width: 60px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.product-desc {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,89 @@
+/* index.css — Shared styles for success/error pages */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f9f4ef, #fff3e0);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Order Success ── */
+.success-container, .error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    width: 100%;
+}
+
+.success-card, .error-card {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+.success-icon {
+    font-size: 5rem;
+    color: #43a047;
+    margin-bottom: 1rem;
+}
+
+.success-card h1 {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+.total-amount {
+    font-size: 1.3rem;
+    color: #ff6600;
+    background-color: #fff8f2;
+    border: 1px solid #ffd0a8;
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.success-card p, .error-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Error Page ── */
+.error-icon {
+    font-size: 5rem;
+    color: #e53935;
+    margin-bottom: 1rem;
+}
+
+.error-card h1 {
+    font-size: 1.8rem;
+    color: #c62828;
+    margin-bottom: 1rem;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-back:hover {
+    background-color: #e55a00;
+    transform: translateY(-2px);
+}
