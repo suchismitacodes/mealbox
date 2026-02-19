@@ -1,114 +1,297 @@
-/* Login.css — MealBox login page */
+/* ═══════════════════════════════════════════════════════════
+   Login & Register — Premium Auth Pages
+   ═══════════════════════════════════════════════════════════ */
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ff6600, #ff9933);
+body.auth-page {
+    background: linear-gradient(135deg, #FAFAF9 0%, #FFF7ED 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.login-wrapper {
+/* ── Auth Container ────────────────────────────────────── */
+.auth-container {
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    max-width: 900px;
+    max-width: 960px;
+    padding: var(--space-8);
 }
 
-.register-wrapper {
+.auth-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-10);
+    text-decoration: none;
+    animation: fadeInDown 0.5s var(--ease-out);
+}
+
+.auth-logo-icon {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary));
+    color: var(--color-white);
+    font-size: var(--text-lg);
+    box-shadow: var(--shadow-primary);
 }
 
-.login-panel {
-    background-color: #fff;
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    width: 380px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+.auth-logo-text {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-text);
+    letter-spacing: -0.02em;
 }
 
-.login-panel h2 {
-    font-size: 1.5rem;
-    color: #ff6600;
-    margin-bottom: 1.5rem;
-    text-align: center;
+.auth-logo-text span {
+    color: var(--color-primary);
 }
 
-.form-group {
-    margin-bottom: 1.2rem;
+/* ── Tab Switcher ──────────────────────────────────────── */
+.auth-tabs {
+    display: flex;
+    background-color: var(--color-surface-sunken);
+    padding: var(--space-1);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-8);
+    gap: var(--space-1);
+    animation: fadeInUp 0.4s var(--ease-out) 0.1s both;
 }
 
-.form-group label {
+.auth-tab {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--duration-base) var(--ease-out);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    border: none;
+    background: none;
+    white-space: nowrap;
+}
+
+.auth-tab:hover {
+    color: var(--color-text-secondary);
+}
+
+.auth-tab.active {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ── Auth Panels ───────────────────────────────────────── */
+.auth-panels {
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-panel {
+    display: none;
+    animation: fadeInUp 0.4s var(--ease-out);
+}
+
+.auth-panel.active {
     display: block;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
 }
 
-.form-group input {
+.auth-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-border-light);
+}
+
+.auth-card-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.auth-card-header h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.auth-card-header p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* ── Form Fields ───────────────────────────────────────── */
+.auth-field {
+    margin-bottom: var(--space-5);
+}
+
+.auth-field label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.auth-input-wrapper {
+    position: relative;
+}
+
+.auth-input-wrapper i {
+    position: absolute;
+    left: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    pointer-events: none;
+}
+
+.auth-input-wrapper input {
     width: 100%;
-    padding: 0.65rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 0.688rem 0.875rem 0.688rem 2.5rem;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-fast) var(--ease-out);
     outline: none;
-    transition: border-color 0.2s;
     box-sizing: border-box;
 }
 
-.form-group input:focus {
-    border-color: #ff6600;
-    box-shadow: 0 0 0 3px rgba(255,102,0,0.1);
+.auth-input-wrapper input::placeholder {
+    color: var(--color-text-muted);
 }
 
-.btn-login {
+.auth-input-wrapper input:hover {
+    border-color: var(--color-border-strong);
+}
+
+.auth-input-wrapper input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.08);
+}
+
+/* ── Auth Button ───────────────────────────────────────── */
+.auth-submit {
     width: 100%;
-    padding: 0.8rem;
-    background-color: #ff6600;
-    color: #fff;
+    padding: 0.75rem;
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-inverse);
+    background-color: var(--color-primary);
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    margin-top: 0.5rem;
+    box-shadow: var(--shadow-primary);
+    transition: all var(--duration-base) var(--ease-out);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
 }
 
-.btn-login:hover {
-    background-color: #e55a00;
+.auth-submit:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-primary-lg);
     transform: translateY(-1px);
 }
 
-.error-msg {
-    color: #e53935;
-    background-color: #ffebee;
-    border: 1px solid #ffcdd2;
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+.auth-submit:active {
+    transform: translateY(0);
 }
 
-.register-link {
+/* ── Auth Error ────────────────────────────────────────── */
+.auth-error {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-error-light);
+    border: 1px solid #FECACA;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-error);
+    font-weight: var(--font-medium);
+    animation: fadeInUp 0.3s var(--ease-out);
+}
+
+.auth-error i {
+    flex-shrink: 0;
+}
+
+/* ── Auth Footer Link ──────────────────────────────────── */
+.auth-footer {
     text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #666;
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-light);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
 }
 
-.register-link a {
-    color: #ff6600;
+.auth-footer a {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
     text-decoration: none;
-    font-weight: 600;
 }
 
-.register-link a:hover {
+.auth-footer a:hover {
     text-decoration: underline;
+}
+
+/* ── Registration extras ───────────────────────────────── */
+.auth-card.register-card {
+    max-width: 440px;
+}
+
+/* ── Back to home link ─────────────────────────────────── */
+.auth-back-link {
+    margin-top: var(--space-8);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: color var(--duration-fast) var(--ease-out);
+    animation: fadeIn 0.5s var(--ease-out) 0.3s both;
+}
+
+.auth-back-link:hover {
+    color: var(--color-text-secondary);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .auth-container {
+        padding: var(--space-4);
+    }
+
+    .auth-card {
+        padding: var(--space-8) var(--space-6);
+        border-radius: var(--radius-xl);
+    }
+
+    .auth-tabs {
+        width: 100%;
+    }
+
+    .auth-tab {
+        flex: 1;
+        justify-content: center;
+        padding: var(--space-3) var(--space-4);
+    }
 }

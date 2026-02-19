@@ -1,89 +1,145 @@
-/* index.css — Shared styles for success/error pages */
+/* ═══════════════════════════════════════════════════════════
+   Status Pages — Success & Error
+   ═══════════════════════════════════════════════════════════ */
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f9f4ef, #fff3e0);
+body.status-page {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, #FAFAF9 0%, #FFF7ED 100%);
 }
 
-/* ── Order Success ── */
-.success-container, .error-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 2rem;
+/* ── Status Container ──────────────────────────────────── */
+.status-container {
+    padding: var(--space-8);
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.success-card, .error-card {
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 3rem 2.5rem;
+.status-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-12) var(--space-10);
     text-align: center;
-    max-width: 480px;
+    max-width: 500px;
     width: 100%;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-border-light);
+    animation: scaleIn 0.5s var(--ease-spring);
 }
 
-.success-icon {
-    font-size: 5rem;
-    color: #43a047;
-    margin-bottom: 1rem;
+/* ── Success State ─────────────────────────────────────── */
+.status-icon {
+    width: 88px;
+    height: 88px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-8);
+    font-size: var(--text-4xl);
+    animation: bounceIn 0.6s var(--ease-spring);
 }
 
-.success-card h1 {
-    font-size: 1.8rem;
-    color: #2e7d32;
-    margin-bottom: 1rem;
+.status-icon.success {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
 }
 
-.total-amount {
-    font-size: 1.3rem;
-    color: #ff6600;
-    background-color: #fff8f2;
-    border: 1px solid #ffd0a8;
-    border-radius: 8px;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
+.status-icon.error {
+    background-color: var(--color-error-light);
+    color: var(--color-error);
 }
 
-.success-card p, .error-card p {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+.status-card h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.01em;
 }
 
-/* ── Error Page ── */
-.error-icon {
-    font-size: 5rem;
-    color: #e53935;
-    margin-bottom: 1rem;
+.status-card h1.success-title {
+    color: #15803D;
 }
 
-.error-card h1 {
-    font-size: 1.8rem;
-    color: #c62828;
-    margin-bottom: 1rem;
+.status-card h1.error-title {
+    color: #B91C1C;
 }
 
-.btn-back {
-    display: inline-block;
-    background-color: #ff6600;
-    color: #fff;
-    text-decoration: none;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s, transform 0.1s;
+.status-card .status-message {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.btn-back:hover {
-    background-color: #e55a00;
-    transform: translateY(-2px);
+/* ── Amount Badge ──────────────────────────────────────── */
+.amount-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-8);
+    background-color: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-8);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    font-weight: var(--font-bold);
+}
+
+.amount-badge i {
+    font-size: var(--text-base);
+    opacity: 0.7;
+}
+
+/* ── Status Actions ────────────────────────────────────── */
+.status-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.status-actions .btn {
+    min-width: 200px;
+}
+
+/* ── Confetti animation (decorative) ───────────────────── */
+.status-card.success-card::before,
+.status-card.success-card::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .status-card {
+        padding: var(--space-8) var(--space-6);
+        border-radius: var(--radius-2xl);
+    }
+
+    .status-icon {
+        width: 72px;
+        height: 72px;
+        font-size: var(--text-3xl);
+    }
+
+    .status-card h1 {
+        font-size: var(--text-xl);
+    }
+
+    .amount-badge {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-base);
+    }
 }
