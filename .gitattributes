@@ -1,2 +1,14 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# Ignore build output
+target/* linguist-generated=true
+
+# Ignore static assets
+src/main/resources/static/* linguist-generated=true
+src/main/resources/templates/* linguist-generated=true
+
+# Ignore frontend files
+*.html linguist-generated=true
+*.css linguist-generated=true
+*.js linguist-generated=true
