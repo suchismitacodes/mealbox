@@ -4,11 +4,9 @@
 # Ignore build output
 target/* linguist-generated=true
 
-# Ignore static assets
-src/main/resources/static/* linguist-generated=true
-src/main/resources/templates/* linguist-generated=true
+# Ignore minified or compiled frontend (if any)
+dist/* linguist-generated=true
+build/* linguist-generated=true
 
-# Ignore frontend files
-*.html linguist-generated=true
-*.css linguist-generated=true
-*.js linguist-generated=true
+# Optional: reduce only static folder weight
+src/main/resources/static/* linguist-generated=true
