@@ -1,12 +1,18 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
 
-# Ignore build output
-target/* linguist-generated=true
+# Build output — exclude entirely from language stats
+target/** linguist-generated=true
 
-# Ignore minified or compiled frontend (if any)
-dist/* linguist-generated=true
-build/* linguist-generated=true
+# Images — not code, exclude from stats
+src/main/resources/static/Images/** linguist-vendored=true
 
-# Optional: reduce only static folder weight
-src/main/resources/static/* linguist-generated=true
+# Mark most CSS as vendored to suppress percentage
+src/main/resources/static/css/** linguist-vendored=true
+# Override: keep global.css so CSS still appears in stats
+src/main/resources/static/css/global.css linguist-vendored=false
+
+# Mark most HTML templates as documentation to suppress percentage
+src/main/resources/templates/*.html linguist-documentation=true
+# Override: keep Home.html so HTML still appears in stats
+src/main/resources/templates/Home.html linguist-documentation=false
